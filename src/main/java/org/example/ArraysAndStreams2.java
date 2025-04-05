@@ -7,31 +7,56 @@ import java.util.stream.Collectors;
 
 public class ArraysAndStreams2 {
    public static void main(String[] args) {
-      String[] strings = 
-         {"Red", "orange", "Yellow", "green", "Blue", "indigo", "Violet"};
+      String[] strings =
+              {"Red", "orange", "Yellow", "green", "Blue", "indigo", "Violet"};
+
 
       // display original strings
       System.out.printf("Original strings: %s%n", Arrays.asList(strings));
 
       // strings in uppercase
       System.out.printf("strings in uppercase: %s%n",
-         Arrays.stream(strings)             
-               .map(String::toUpperCase)   
-               .collect(Collectors.toList()));
+              Arrays.stream(strings)
+                      .map(String::toUpperCase)
+                      .collect(Collectors.toList()));
 
       // strings less than "n" (case insensitive) sorted ascending
       System.out.printf("strings less than n sorted ascending: %s%n",
-         Arrays.stream(strings)                            
-               .filter(s -> s.compareToIgnoreCase("n") < 0)
-               .sorted(String.CASE_INSENSITIVE_ORDER)
-               .collect(Collectors.toList()));             
+              Arrays.stream(strings)
+                      .filter(s -> s.compareToIgnoreCase("n") < 0)
+                      .sorted(String.CASE_INSENSITIVE_ORDER)
+                      .collect(Collectors.toList()));
 
       // strings less than "n" (case insensitive) sorted descending
       System.out.printf("strings less than n sorted descending: %s%n",
-         Arrays.stream(strings)
-               .filter(s -> s.compareToIgnoreCase("n") < 0)
-               .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
-               .collect(Collectors.toList()));
+              Arrays.stream(strings)
+                      .filter(s -> s.compareToIgnoreCase("n") < 0)
+                      .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
+                      .collect(Collectors.toList()));
+      /* Task 1.
+        Use a stream to filter string that start with a vowel(case-insensitive). Collect and display these strings.
+       */
+      System.out.printf("Task 1 - string with a vowel(case-insensitive): %s%n",
+              Arrays.stream(strings)
+                      .filter(s -> !s.isEmpty() && "AEIOUaeiou".contains(String.valueOf(s.charAt(0))))
+                      .collect(Collectors.toList())
+      );
+      /* Task 2.
+        Use a stream to concatenate all the strings into a single string, separated by a comma, and display the result
+       */
+      System.out.printf("Task 2 - string that is concatenated as a single string, seperated by commas: %s%n",
+              Arrays.stream(strings)
+                      .collect(Collectors.joining(", "))
+      );
+      /* Task 3.
+        Use a stream to count the number of strings that contain more than 5 characters(case-insensitive) and display the count
+       */
+      System.out.printf("Task 3 - count that is the number of strings that contain more than 5 characters: %s%n",
+      Arrays.stream(strings)
+              .filter(s -> s.length() > 5)
+              .count()
+      );
+
    }
 } 
 
